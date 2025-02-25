@@ -1,0 +1,3 @@
+Array declaration: arr[10]
+Array declaration: values[50]
+Array declaration: letters[26]
