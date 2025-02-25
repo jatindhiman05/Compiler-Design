@@ -4,10 +4,10 @@ This repository contains practicals and programs for the Compiler Design Lab at 
 
 | S. No. | Name of Practical/Program | Go Here |
 |--------|----------------------------|---------|
-| 1 | To generate and analyze the intermediate files generated during the compilation of a C/C++ program. | [Go]() |
-| 2 | To develop a lexical analyzer in C++ that reads a C++ source file and identifies reserved keywords, variables, numbers, and operators. | [Go]() |
-| 3 | Implementation of lexical analysis through regex library. | [Go Here]() |
-| 4 | To understand the working of the Lex tool for lexical analysis by implementing various programs. | [Go]() |
+| 1 | To generate and analyze the intermediate files generated during the compilation of a C/C++ program. | [Go](https://github.com/jatindhiman05/Compiler-Design/tree/master/Lab%201) |
+| 2 | To develop a lexical analyzer in C++ that reads a C++ source file and identifies reserved keywords, variables, numbers, and operators. | [Go](https://github.com/jatindhiman05/Compiler-Design/tree/master/Lab%202) |
+| 3 | Implementation of lexical analysis through regex library. | [Go](https://github.com/jatindhiman05/Compiler-Design/tree/master/Lab%203) |
+| 4 | To understand the working of the Lex tool for lexical analysis by implementing various programs. | [Go](https://github.com/jatindhiman05/Compiler-Design/tree/master/Lab%204) |
 
 ## How to Use
 
