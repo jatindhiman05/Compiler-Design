@@ -2,7 +2,7 @@
 This repository contains practicals and programs for the Compiler Design Lab at UIET, Panjab University, Chandigarh. The exercises cover topics such as C/C++ compilation, lexical analysis, and regex-based processing.
 ## Index
 
-| S. No. | Name of Practical/Program | Go Here |
+| S. No. | Name of Practical/Program | Go |
 |--------|----------------------------|---------|
 | 1 | To generate and analyze the intermediate files generated during the compilation of a C/C++ program. | [Go](https://github.com/jatindhiman05/Compiler-Design/tree/master/Lab%201) |
 | 2 | To develop a lexical analyzer in C++ that reads a C++ source file and identifies reserved keywords, variables, numbers, and operators. | [Go](https://github.com/jatindhiman05/Compiler-Design/tree/master/Lab%202) |
