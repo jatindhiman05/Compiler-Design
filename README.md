@@ -31,4 +31,4 @@ This repository contains practicals and programs for the Compiler Design Lab at 
 - Lex/Yacc tools (for Lex programs)
 
 ## Contributions
-Feel free to contribute by adding new programs, improving existing ones, or updating documentation.
+Feel free to contribute by adding new programs.
