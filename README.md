@@ -1,5 +1,5 @@
 ## Compiler Design Lab - UIET, Panjab University, Chandigarh
-This repository contains practicals and programs for the Compiler Design Lab at UIET, Panjab University, Chandigarh. The exercises cover topics such as C/C++ compilation, lexical analysis, and regex-based processing.
+This repository contains practicals and programs for the Compiler Design Lab at UIET, Panjab University, Chandigarh.
 ## Index
 
 | S. No. | Name of Practical/Program | Go |
