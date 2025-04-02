@@ -10,7 +10,7 @@ This repository contains practicals and programs for the Compiler Design Lab at 
 | 4 | To understand the working of the Lex tool for lexical analysis by implementing various programs. | [Go](https://github.com/jatindhiman05/Compiler-Design/tree/master/Lab%204) |
 | 5 | To implement Thompson's construction algorithm for converting a regular expression into a Non-deterministic Finite Automaton (NFA). | [Go](https://github.com/jatindhiman05/Compiler-Design/blob/master/Lab%205/RegexToNfa.cpp) |
 | 6 | To implement a recursive descent parser for validating arithmetic expressions using context-free grammar. | [Go](https://github.com/jatindhiman05/Compiler-Design/blob/master/Lab%206/recursiveDescentParser.cpp) |
-| 7 | To compute the First and Follow sets of a given grammar using a C++ program. | [Go](https://github.com/jatindhiman05/Compiler-Design/blob/master/Lab%207/firstFollow.cpp) |
+| 7 | To compute the First and Follow sets of a given grammar using a C++ program. | [Go](https://github.com/jatindhiman05/Compiler-Design/blob/master/Lab%206/firstFollow.cpp) |
 
 
 ## How to Use
