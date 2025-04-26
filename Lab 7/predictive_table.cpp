@@ -6,9 +6,9 @@
 #include <iomanip>
 using namespace std;
 
-unordered_map<char, vector<string>> grammar;                   
-unordered_map<char, unordered_set<char>> firstSet;             
-unordered_map<char, unordered_set<char>> followSet;           
+unordered_map<char, vector<string>> grammar;
+unordered_map<char, unordered_set<char>> firstSet;
+unordered_map<char, unordered_set<char>> followSet;
 unordered_map<char, unordered_map<char, string>> parsingTable;
 char startSymbol;
 
@@ -28,7 +28,7 @@ void calculateFirst(char symbol)
             { // Non-terminal
                 calculateFirst(ch);
                 result.insert(firstSet[ch].begin(), firstSet[ch].end());
-                if (!firstSet[ch].count('#')) 
+                if (!firstSet[ch].count('#'))
                     break;
             }
             else
@@ -42,6 +42,7 @@ void calculateFirst(char symbol)
     firstSet[symbol] = result;
 }
 
+// Calculate Follow of a symbol
 void calculateFollow(char symbol)
 {
     if (followSet.count(symbol))
@@ -49,20 +50,20 @@ void calculateFollow(char symbol)
 
     unordered_set<char> result;
     if (symbol == startSymbol)
-        result.insert('$'); 
+        result.insert('$'); // End marker
 
-    for (auto it = grammar.begin(); it != grammar.end(); ++it)
+    for (auto &rule : grammar)
     {
-        char lhs = it->first;
-        const vector<string> &productions = it->second;
+        char lhs = rule.first;
+        const vector<string> &productions = rule.second;
 
         for (const string &production : productions)
         {
-            for (int i = 0; i < production.size(); ++i)
+            for (size_t i = 0; i < production.size(); ++i)
             {
                 if (production[i] == symbol)
                 {
-                    int k = i + 1;
+                    size_t k = i + 1;
                     while (k < production.size())
                     {
                         char next = production[k];
@@ -94,6 +95,7 @@ void calculateFollow(char symbol)
     followSet[symbol] = result;
 }
 
+// Construct Parsing Table
 void constructParsingTable()
 {
     for (auto &rule : grammar)
@@ -107,8 +109,8 @@ void constructParsingTable()
             for (char ch : production)
             {
                 if (isupper(ch))
-                {                               
-                    firstAlpha = firstSet[ch]; 
+                {
+                    firstAlpha = firstSet[ch];
                     if (!firstAlpha.count('#'))
                         break;
                 }
@@ -145,14 +147,13 @@ void printParsingTable()
     cout << setw(10) << " ";
     unordered_set<char> terminals;
 
-    // Gather all terminals for table headers
     for (auto &rule : grammar)
     {
         for (auto &production : rule.second)
         {
             for (char ch : production)
             {
-                if (!isupper(ch) && ch != '#') // Terminals
+                if (!isupper(ch) && ch != '#')
                     terminals.insert(ch);
             }
         }
@@ -177,6 +178,59 @@ void printParsingTable()
     }
 }
 
+// Simulate Parsing
+void parseString(const string &input)
+{
+    cout << "\nParsing Input: " << input << endl;
+    string augmentedInput = input + "$";
+    vector<char> stack;
+    stack.push_back('$');
+    stack.push_back(startSymbol);
+
+    int i = 0;
+    while (!stack.empty())
+    {
+        char top = stack.back();
+        char current = augmentedInput[i];
+
+        cout << "Stack: ";
+        for (char c : stack)
+            cout << c;
+        cout << " | Input: " << augmentedInput.substr(i) << " | Action: ";
+
+        if (top == current)
+        {
+            cout << "Match '" << top << "'" << endl;
+            stack.pop_back();
+            i++;
+        }
+        else if (!isupper(top))
+        {
+            cout << "Error (Expected '" << top << "', got '" << current << "')" << endl;
+            return;
+        }
+        else if (parsingTable[top].count(current))
+        {
+            string production = parsingTable[top][current];
+            cout << top << " -> " << production << endl;
+            stack.pop_back();
+            if (production != "#")
+            {
+                for (int j = production.size() - 1; j >= 0; j--)
+                    stack.push_back(production[j]);
+            }
+        }
+        else
+        {
+            cout << "Error (No rule for [" << top << ", " << current << "])" << endl;
+            return;
+        }
+    }
+
+    cout << "\nString accepted by the grammar.\n";
+}
+
+// Main Function
 int main()
 {
     grammar['E'] = {"TR"};
@@ -186,32 +240,36 @@ int main()
     grammar['F'] = {"(E)", "i"};
     startSymbol = 'E';
 
-    for (auto it = grammar.begin(); it != grammar.end(); ++it)
-        calculateFirst(it->first);
+    // Compute First sets
+    for (auto &rule : grammar)
+        calculateFirst(rule.first);
 
     cout << "First Sets:\n";
-    for (auto it = firstSet.begin(); it != firstSet.end(); ++it)
+    for (auto &entry : firstSet)
     {
-        cout << "First(" << it->first << ") = { ";
-        for (char ch : it->second)
+        cout << "First(" << entry.first << ") = { ";
+        for (char ch : entry.second)
             cout << ch << " ";
         cout << "}\n";
     }
 
-    for (auto it = grammar.begin(); it != grammar.end(); ++it)
-        calculateFollow(it->first);
+    // Compute Follow sets
+    for (auto &rule : grammar)
+        calculateFollow(rule.first);
 
     cout << "\nFollow Sets:\n";
-    for (auto it = followSet.begin(); it != followSet.end(); ++it)
+    for (auto &entry : followSet)
     {
-        cout << "Follow(" << it->first << ") = { ";
-        for (char ch : it->second)
+        cout << "Follow(" << entry.first << ") = { ";
+        for (char ch : entry.second)
             cout << ch << " ";
         cout << "}\n";
     }
 
+    // Construct Parsing Table
     constructParsingTable();
     printParsingTable();
+    parseString("i+i*i");
 
     return 0;
 }
